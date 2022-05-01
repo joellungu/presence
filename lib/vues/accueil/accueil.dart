@@ -28,16 +28,16 @@ class Accueil extends StatelessWidget {
     {
       "libelle": "Statistique",
       "v": "profil",
-      "icon": const Icon(Icons.person),
+      "icon": const Icon(Icons.assessment_outlined),
     },
     {
       "libelle": "Enregistrement & Suppression Agent",
       "v": "admin",
-      "icon": const Icon(Icons.admin_panel_settings)
+      "icon": const Icon(Icons.person_add)
     },
     {
       "libelle": "Calendrier",
-      "v": "propos",
+      "v": "calendrier",
       "icon": const Icon(Icons.event_note_outlined)
     },
     {
@@ -69,7 +69,12 @@ class Accueil extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(),
-                    Container(),
+                    Container(
+                      width: 70,
+                      height: 70,
+                      child: Image.asset(
+                          "assets/Coat_of_arms_of_the_Democratic_Republic_of_the_Congo.png"),
+                    ),
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(left: 20),
@@ -153,14 +158,16 @@ class Accueil extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           title: accueilController.gVue.value == "compagne"
-              ? const Text("Compagne en cours")
+              ? const Text("Feuille de présence")
               : accueilController.gVue.value == "historique"
-                  ? const Text("Historique")
+                  ? const Text("Gestionnaire des abscences")
                   : accueilController.gVue.value == "profil"
-                      ? const Text("Profilr")
-                      : accueilController.gVue.value == "admin"
-                          ? const Text("Admin")
-                          : const Text("À propos"),
+                      ? const Text("Statistique")
+                      : accueilController.gVue.value == "calendrier"
+                          ? const Text("Calendrier")
+                          : accueilController.gVue.value == "admin"
+                              ? const Text("Enregistrement & Suppression Agent")
+                              : const Text("À propos"),
         ),
         body: accueilController.gVue.value == "compagne"
             ? EnCours()
@@ -168,9 +175,11 @@ class Accueil extends StatelessWidget {
                 ? Historique()
                 : accueilController.gVue.value == "profil"
                     ? Profil()
-                    : accueilController.gVue.value == "admin"
-                        ? Admin()
-                        : Propos(),
+                    : accueilController.gVue.value == "calendrier"
+                        ? Profil()
+                        : accueilController.gVue.value == "admin"
+                            ? Admin()
+                            : Propos(),
       ),
     );
   }
