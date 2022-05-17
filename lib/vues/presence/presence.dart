@@ -1,7 +1,7 @@
 import 'package:data_table_2/paginated_data_table_2.dart';
 import 'package:flutter/material.dart';
 
-class EnCours extends StatelessWidget {
+class Presence extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,25 +12,42 @@ class EnCours extends StatelessWidget {
           minWidth: 600,
           columns: [
             DataColumn2(
-              label: Text('Column A'),
+              label: Text(
+                'Nom & Post-nom',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               size: ColumnSize.L,
             ),
             DataColumn(
-              label: Text('Column B'),
+              label: Text(
+                'Matricule',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             DataColumn(
-              label: Text('Column C'),
+              label: Text(
+                'Affectation',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-            DataColumn(
-              label: Text('Column D'),
+            DataColumn2(
+              label: Text(
+                'Heure arrivée',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              size: ColumnSize.S,
             ),
-            DataColumn(
-              label: Text('Column NUMBERS'),
+            DataColumn2(
+              label: Text(
+                'Heure départ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              size: ColumnSize.S,
               numeric: true,
             ),
           ],
           rows: List<DataRow>.generate(
-              100,
+              10,
               (index) => DataRow(cells: [
                     DataCell(Text('A' * (10 - index % 10))),
                     DataCell(Text('B' * (10 - (index + 5) % 10))),

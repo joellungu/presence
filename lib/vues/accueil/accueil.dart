@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence_agent/vues/abscence/abscence.dart';
 import 'package:presence_agent/vues/accueil/accueilController.dart';
-
+import 'package:presence_agent/vues/agents/agents.dart';
+import 'package:presence_agent/vues/calendrier/calendrier.dart';
+import 'package:presence_agent/vues/organigrame/organigramme.dart';
+import 'package:presence_agent/vues/presence/presence.dart';
+import 'package:presence_agent/vues/statistique/statistique.dart';
 import '../admin/admin.dart';
-import '../encours/encours.dart';
 import '../historique/historique.dart';
 import '../profil/profil.dart';
 import '../propos.dart';
@@ -17,22 +21,27 @@ class Accueil extends StatelessWidget {
   List listeMenu = [
     {
       "libelle": "Feuille de présence",
-      "v": "compagne",
+      "v": "presence",
       "icon": const Icon(Icons.checklist_outlined)
     },
     {
       "libelle": "Gestionnaire des abscences",
-      "v": "historique",
+      "v": "abscence",
       "icon": const Icon(Icons.history)
     },
     {
+      "libelle": "Organigramme",
+      "v": "organigramme",
+      "icon": const Icon(Icons.dashboard_customize)
+    },
+    {
       "libelle": "Statistique",
-      "v": "profil",
+      "v": "statistique",
       "icon": const Icon(Icons.assessment_outlined),
     },
     {
       "libelle": "Enregistrement & Suppression Agent",
-      "v": "admin",
+      "v": "agent",
       "icon": const Icon(Icons.person_add)
     },
     {
@@ -43,7 +52,7 @@ class Accueil extends StatelessWidget {
     {
       "libelle": "À propos",
       "v": "propos",
-      "icon": const Icon(Icons.dashboard_customize)
+      "icon": const Icon(Icons.text_fields)
     },
     {
       "libelle": "Quitter",
@@ -106,9 +115,12 @@ class Accueil extends StatelessWidget {
                   return ListTile(
                     onTap: () {
                       var v = listeMenu[index]["v"];
-                      if (v == "compagne" ||
-                          v == "historique" ||
-                          v == "profil" ||
+                      if (v == "presence" ||
+                          v == "agent" ||
+                          v == "organigramme" ||
+                          v == "abscence" ||
+                          v == "statistique" ||
+                          v == "calendrier" ||
                           v == "propos" ||
                           v == "admin") {
                         //
@@ -157,29 +169,37 @@ class Accueil extends StatelessWidget {
         ),
         appBar: AppBar(
           elevation: 0,
-          title: accueilController.gVue.value == "compagne"
+          title: accueilController.gVue.value == "presence"
               ? const Text("Feuille de présence")
-              : accueilController.gVue.value == "historique"
-                  ? const Text("Gestionnaire des abscences")
-                  : accueilController.gVue.value == "profil"
+              : accueilController.gVue.value == "agent"
+                  ? const Text("Enregistrement & Suppression Agent")
+                  : accueilController.gVue.value == "statistique"
                       ? const Text("Statistique")
-                      : accueilController.gVue.value == "calendrier"
-                          ? const Text("Calendrier")
-                          : accueilController.gVue.value == "admin"
-                              ? const Text("Enregistrement & Suppression Agent")
-                              : const Text("À propos"),
+                      : accueilController.gVue.value == "abscence"
+                          ? const Text("Gestionnaire des abscences")
+                          : accueilController.gVue.value == "organigramme"
+                              ? const Text("Organigramme")
+                              : accueilController.gVue.value == "calendrier"
+                                  ? const Text("Calendrier")
+                                  : accueilController.gVue.value == "admin"
+                                      ? const Text("Admin")
+                                      : const Text("À propos"),
         ),
-        body: accueilController.gVue.value == "compagne"
-            ? EnCours()
-            : accueilController.gVue.value == "historique"
-                ? Historique()
-                : accueilController.gVue.value == "profil"
-                    ? Profil()
-                    : accueilController.gVue.value == "calendrier"
-                        ? Profil()
-                        : accueilController.gVue.value == "admin"
-                            ? Admin()
-                            : Propos(),
+        body: accueilController.gVue.value == "presence"
+            ? Presence()
+            : accueilController.gVue.value == "agent"
+                ? Agents()
+                : accueilController.gVue.value == "statistique"
+                    ? Statistique()
+                    : accueilController.gVue.value == "abscence"
+                        ? Abscence()
+                        : accueilController.gVue.value == "organigramme"
+                            ? Organigrame()
+                            : accueilController.gVue.value == "calendrier"
+                                ? Calendrier()
+                                : accueilController.gVue.value == "admin"
+                                    ? Admin()
+                                    : Propos(),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class AccueilController extends GetxController {
-  RxString _vue = "".obs;
+  RxString _vue = "presence".obs;
 
   RxString get gVue {
     return _vue;
